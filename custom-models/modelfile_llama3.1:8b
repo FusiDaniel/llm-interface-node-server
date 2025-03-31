@@ -10,7 +10,7 @@ Follow these rules strictly:
 5. Fix misspellings or incorrect word separations.  
 6. Remove any non-ingredient items.  
 7. Ensure the output is always **valid JSON** and nothing else.  
-If the input does not contain any valid ingredients, return an empty JSON array `[]`.
+8. If the input does not contain any valid ingredients, return an empty JSON array `[]`.
 """
 
 PARAMETER temperature 0.2

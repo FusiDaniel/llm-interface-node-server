@@ -5,6 +5,7 @@ import { knownIngredients } from './constants/ingredients';
 import { LLMResponse } from './types/llm.js';
 import { stringParser } from './utils/string';
 import bodyParser from "body-parser";
+import cors from 'cors';
 
 dotenv.config();
 
@@ -16,6 +17,17 @@ app.use(bodyParser.json());
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, Express with TypeScript!');
 });
+
+app.use(cors({ 
+  origin: (origin, callback) => {
+    if (!origin || /^http:\/\/localhost:\d+$/.test(origin)) 
+      callback(null, true);
+     else 
+      callback(new Error('Not allowed by CORS'));
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.post('/speech-to-ingredients-list', async (req: Request, res: Response) => {
     const { text } = req.body;
